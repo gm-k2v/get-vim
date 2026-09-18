@@ -3,9 +3,9 @@ mkdir -p ~/.vim-appImage
 
 if curl -L -o ~/.vim-appImage/vim.appimage https://github.com/vim/vim-appimage/releases/download/v9.1.1301/Vim-v9.1.1301.glibc2.29-x86_64.AppImage; then
   chmod +x ~/.vim-appImage/vim.appimage
-  if ( cd ~/.vim-appImage; ~/.vim-appImage/vim.appimage --appimage-extract ); then
+  if ( cd ~/.vim-appImage && ~/.vim-appImage/vim.appimage --appimage-extract ); then
     [[ -f ~/.vimrc ]] || touch ~/.vimrc
     alias vi=~/.vim-appImage/squashfs-root/AppRun
-    grep -q "$alias vi=" ~/.bash_profile || echo "alias vi=~/.vim-appImage/squashfs-root/AppRun" >>~/.bash_profile
+    grep -q "^alias vi=" ~/.bash_profile 2>/dev/null || echo "alias vi=~/.vim-appImage/squashfs-root/AppRun" >>~/.bash_profile
   fi
 fi
